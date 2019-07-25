@@ -1,0 +1,40 @@
+#== change host.file
+
+spring:
+  profiles: US
+  application:
+    name: eureka-server-clustered   # ==> This is Service-Id
+server:
+  port: 9001  
+eureka:
+  datacenter: Main
+  environment: Production
+  instance:
+    hostname: localhost #my-eureka-server-us.com    
+  client:
+    healthcheck:
+      enabled: true
+    registerWithEureka: true
+    fetchRegistry: true       
+    serviceUrl:
+      defaultZone: http://localhost:9002/eureka/ #http://my-eureka-server-fr.com:9002/eureka/,http://my-eureka-server-vn.com:9003/eureka/
+---
+spring:
+  profiles: INDIA
+  application:
+    name: eureka-server-clustered   # ==> This is Service-Id   
+server:
+  port: 9002
+eureka:
+  datacenter: Main
+  environment: Production
+  instance:
+     hostname: localhost  #my-eureka-server-in.com      
+  client:  
+    healthcheck:
+      enabled: true
+    registerWithEureka: true
+    fetchRegistry: true       
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka/ #http://my-eureka-server-us.com:9001/eureka/,http://my-eureka-server-vn.com:9003/eureka/
+ 
