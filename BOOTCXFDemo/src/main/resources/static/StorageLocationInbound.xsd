@@ -1,0 +1,330 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="uri:com.ekaplus.entity.StorageLocationDetail" xmlns="uri:com.ekaplus.entity.StorageLocationDetail" version="1.0" elementFormDefault="qualified">
+	<xsd:annotation>
+		<xsd:documentation>Standared document for Storage Location interface</xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="StorageLocationDetail">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="MessageHeader" type="MessageInformationType"/>
+				<xsd:element name="DocumentHeader" type="DocumentHeaderType"/>
+				<xsd:element name="StorageLocations" type="StorageLocationsType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="StorageLocationsType">
+		<xsd:sequence>
+			<xsd:element name="StorageLocation" type="StorageLocationType">
+				<xsd:annotation>
+					<xsd:documentation>Each storage location inbound payload will support only one storage location record in it </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="StorageLocationType">
+		<xsd:sequence>
+			<xsd:element name="Group">
+				<xsd:annotation>
+					<xsd:documentation>Corporate Group Name.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="45"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="StorageLocationName">
+				<xsd:annotation>
+					<xsd:documentation>Unique name for the Storage Location being created</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="50"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="LocationType">
+				<xsd:annotation>
+					<xsd:documentation>Type of location under which the Storage Location is located.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="50"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ExternalRefNo" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>External Ref No needs to be mandatory and unique</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="15"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="InternalRefNo" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Internal Ref No needs to be mandatory for document type- Upate,Activate and Deactivate</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="15"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Address">
+				<xsd:annotation>
+					<xsd:documentation>Address of the storage location</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="250"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Country">
+				<xsd:annotation>
+					<xsd:documentation>Country in which the storage location is situated</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="30"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="State" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>State of Storage Location situated under the country selected</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="50"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="City">
+				<xsd:annotation>
+					<xsd:documentation>City of Storage Location situated under the country selected</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="500"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ZipCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Zip code of the storage location</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="20"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PhoneNo" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Phone number of the storage location</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="30"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Fax" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Fax of the storage location</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="30"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Email" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Email address of the storage location</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="30"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Website" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Website address of the storage location</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="100"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="AutomatedRecordingOfRent" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Indicates if storage location rent has to be automatically accrued in the system.
+Value is 'false' if unchecked.Elso 'true'</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:boolean">
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Description" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Description</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="500"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="WarehouseRent" type="WarehouseRentType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Warehouse rent</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="NoOfFreeDays" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Indicates the free number of days for which rent is not payable</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+
+						<xsd:totalDigits value="4"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="WarehouseRentType">
+		<xsd:sequence>
+			<xsd:element name="Amount">
+				<xsd:annotation>
+					<xsd:documentation>Rent amount. 11 digits before decimal and up to 4 digits after the decimal</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:totalDigits value="15"/>
+						<xsd:fractionDigits value="4"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Currency">
+				<xsd:annotation>
+					<xsd:documentation>Currency for rent amount</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="15"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Frequency">
+				<xsd:annotation>
+					<xsd:documentation>Currency for rent amount</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="30"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MessageInformationType">
+		<xsd:sequence>
+			<xsd:element name="MsgSourceSystem">
+				<xsd:annotation>
+					<xsd:documentation>Source system  in which message is originated</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="100"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="MsgEnvironment">
+				<xsd:annotation>
+					<xsd:documentation>Environment in which message is originated</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="100"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="MsgType">
+				<xsd:annotation>
+					<xsd:documentation>Functional grouping of message.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="100"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="MsgTransmissionNo">
+				<xsd:annotation>
+					<xsd:documentation>An unique number through which message will be identified. This will be used for tracing back message.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="100"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="MsgCreated" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>Message created time</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DocumentHeaderType">
+		<xsd:annotation>
+			<xsd:documentation>Reference for basic details</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="DocumentType">
+				<xsd:annotation>
+					<xsd:documentation>Document types can be-
+						Create - for creation of Storage Location
+						Update- for modification of Storage Location
+						Activate- for activating Storage Location
+						Deactivate- for deactivating Storage Location</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="Create"/>
+						<xsd:enumeration value="Update"/>
+						<xsd:enumeration value="Activate"/>
+						<xsd:enumeration value="Deactivate"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PostingDateTime">
+				<xsd:annotation>
+					<xsd:documentation>Posting date and time</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:dateTime"/>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Comments" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Any comments</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1000"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="uri:com.ekaplus.entity.Response" xmlns="uri:com.ekaplus.entity.Response" version="0.01">
+    <xsd:annotation>
+        <xsd:documentation>Standared document structure for EKA CTRM version 8.0</xsd:documentation>
+    </xsd:annotation>
+    <xsd:element name="Eka.Response">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Responses" type="ResponseData" minOccurs="1" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="ResponseData">
+        <xsd:sequence>
+            <xsd:element name="Response" maxOccurs="unbounded" type="ResponseType">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ResponseType">
+        <xsd:annotation>
+            <xsd:documentation>Type for response</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Type" minOccurs="1" maxOccurs="1" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Reponse message type SUCCESS, FAILURE</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ExternalRefNo" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="EkaRefNo" minOccurs="0"/>
+            <xsd:element name="EnvironmentType" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation> Possible values are DEV,TEST,PROD</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Code" minOccurs="0" maxOccurs="1" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Code for response</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Description" minOccurs="1" maxOccurs="unbounded" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Response description, could be error description</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
