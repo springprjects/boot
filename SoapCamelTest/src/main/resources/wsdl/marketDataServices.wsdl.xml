@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://ekaplus.com/MarketData/BankFxRate" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ekaplus.com/MarketData/BankFxRate" targetNamespace="http://ekaplus.com/MarketData/BankFxRate">
+  <wsdl:types>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://ekaplus.com/MarketData/BankFxRate">
+
+    <xsd:complexType name="MessageInformationType">
+    	<xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="MsgSourceSystem" type="xsd:string">
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="MsgEnvironment" type="xsd:string">
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="MsgType" type="xsd:string">
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="MsgTransmissionNo" type="xsd:string">
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="MsgCreated" type="xsd:dateTime"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="BankFxRateType">
+    	<xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="0" name="ExtQuoteRefNo">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="15"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="TradeDate" type="xsd:dateTime"/>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="InstrumentName">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="50"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="PriceSource">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:maxLength value="50"/>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="MaturityDate" type="xsd:dateTime">
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="SpotRateOrForwardRate">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:decimal"/>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="1" name="isSpot" type="xsd:boolean"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="MarketDataResponse">
+    	<xsd:complexType>
+    		<xsd:sequence>
+    			<xsd:element maxOccurs="1" minOccurs="0" name="MessageHeader" type="tns:MessageInformationType">
+    			</xsd:element>
+    			<xsd:element maxOccurs="unbounded" minOccurs="0" name="BankFxRate" type="tns:BankFxRateType"/>
+    		</xsd:sequence>
+    	</xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="MarketDataRequest">
+    	<xsd:complexType>
+    		<xsd:sequence>
+    			<xsd:element name="Username" type="xsd:string"/>
+    			<xsd:element name="Password" type="xsd:string"/>
+    		</xsd:sequence>
+    	</xsd:complexType>
+    </xsd:element>
+</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="MarketDataResponse">
+    <wsdl:part element="tns:MarketDataResponse" name="MarketDataResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="MarketDataRequest">
+    <wsdl:part element="tns:MarketDataRequest" name="MarketDataRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="MarketDataPort">
+    <wsdl:operation name="MarketData">
+      <wsdl:input message="tns:MarketDataRequest" name="MarketDataRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:MarketDataResponse" name="MarketDataResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MarketDataPortSoap11" type="tns:MarketDataPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="MarketData">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="MarketDataRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="MarketDataResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MarketDataPortService">
+    <wsdl:port binding="tns:MarketDataPortSoap11" name="MarketDataPortSoap11">
+      <soap:address location="http://localhost:8080/ws/ekaplus/marketdata"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

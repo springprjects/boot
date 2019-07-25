@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://primefaces.org/ui"
+  >
+
+<h:head>
+  <title>Airtel Africa</title>
+  <h:outputStylesheet name="/css/main.css" />
+</h:head>
+
+<h:body>
+
+  <h:form>
+    <p:panel header="Airtel Africa">
+     <p:messages id="loginFormMessages" autoUpdate="false"/>
+      <h:panelGrid columns="2" cellpadding="4">
+
+        <h:outputText value="UserName : " />
+        <p:inputText value="#{loginBean.username}" required="true" label="UserName" renderLabel="false" />
+
+        <h:outputText value="Password : " />
+        <p:password value="#{loginBean.password}" required="true" label="Password" renderLabel="false" >
+        	
+        </p:password>
+
+          <p:commandButton value="Login" action="#{loginBean.loginAction()}" update="loginFormMessages"/>
+      </h:panelGrid>
+    </p:panel>
+
+  </h:form>
+
+
+</h:body>
+</html>
