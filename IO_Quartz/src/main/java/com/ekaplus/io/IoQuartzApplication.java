@@ -5,16 +5,12 @@ import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
-import org.quartz.SimpleTrigger;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
-import org.springframework.scheduling.quartz.SimpleTriggerFactoryBean;
-import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
 @SpringBootApplication
 public class IoQuartzApplication {
@@ -44,7 +40,7 @@ public class IoQuartzApplication {
 	
 	
 	
-	/*@Bean
+/*	@Bean
 	public JobDetailFactoryBean jobDetail() {
 	    JobDetailFactoryBean jobDetailFactory = new JobDetailFactoryBean();
 	    jobDetailFactory.setJobClass(SimpleJob.class);
@@ -60,7 +56,7 @@ public class IoQuartzApplication {
 	    trigger.setRepeatInterval(3600000);
 	    trigger.setRepeatCount(SimpleTrigger.REPEAT_INDEFINITELY);
 	    return trigger;
-	}
+	}*/
 	
 	
 	@Bean
@@ -75,7 +71,7 @@ public class IoQuartzApplication {
 	    scheduler.scheduleJob(job, trigger);
 	    scheduler.start();
 	    return scheduler;
-	}*/
+	}
 	
 	
 
