@@ -13,15 +13,11 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
-import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
-import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
-import org.springframework.batch.item.file.transform.PassThroughLineAggregator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.scheduling.annotation.Scheduled;
 
 @Configuration
@@ -36,14 +32,14 @@ public class BatchConfig {
 	@Autowired
 	JobLauncher jobLauncher;
 
-	@Bean
+/*	@Bean
 	public Job importUserJob() {
 		return jobBuilderFactory.get("hello").start(helloWorldStep(stepBuilderFactory)).build();
 	}
 
 	@Bean
 	public Step helloWorldStep(StepBuilderFactory stepBuilders) {
-		return stepBuilders.get("helloWorldStep").<User, String>chunk(10).reader(reader()).processor(processor())
+		return stepBuilders.get("helloWorldStep").<User, String>chunk(10).faultTolerant().skipLimit(2).skip(FlatFileParseException.class).reader(reader()).processor(processor())
 				.writer(writer()).build();
 	}
 
@@ -57,7 +53,7 @@ public class BatchConfig {
 		return new FlatFileItemWriterBuilder<String>().name("greetingItemWriter")
 				.resource(new FileSystemResource("target/test-outputs/greetings.txt"))
 				.lineAggregator(new PassThroughLineAggregator<>()).build();
-	}
+	}*/
 	
 	@Bean
 	public FlatFileItemReader<User> reader() {
@@ -76,7 +72,7 @@ public class BatchConfig {
 
 	
 
-	/*@Autowired
+	@Autowired
 	public DataSource dataSource;
 
 	@Bean
@@ -86,8 +82,13 @@ public class BatchConfig {
 
 	@Bean
 	public Step step1() {
-		return stepBuilderFactory.get("step1").<User, User>chunk(10).reader(reader()).processor(jdbcProcessor())
+		return stepBuilderFactory.get("step1").<User, User>chunk(10).faultTolerant().skipPolicy(skipPolicy()).reader(reader()).processor(jdbcProcessor())
 				.writer(jdbcBatchItemWriter()).build();
+	}
+	
+	@Bean
+	public ExceptionSkipPolicy skipPolicy() {
+		return new ExceptionSkipPolicy();
 	}
 
 	@Bean
@@ -102,6 +103,6 @@ public class BatchConfig {
 		writer.setSql("INSERT INTO user (name, age, address) VALUES (:name, :age, :address);");
 		writer.setDataSource(dataSource);
 		return writer;
-	}*/
+	}
 
 }
